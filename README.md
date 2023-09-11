@@ -59,8 +59,7 @@ python train_muti_GPU_lmdb.py --nodes 1 \
 ```
 For testing, you can simply pre-train MaskMol using single GPU on 20w dataset:
 ```
-python train_muti_GPU_lmdb.py
-                   --gpu 0 \
+python train_lmdb.py --gpu 0 \
                    --batch 32 \
                    --epochs 50 \
                    --proportion 0.5 \
@@ -69,3 +68,30 @@ python train_muti_GPU_lmdb.py
                    --Motif_lambda 1 \
                    --nums 200000
 ```
+
+## Finetuning
+
+**1. Download pre-trained ImageMol** <br>  
+You can download pre-trained model and push it into the folder ckpts/ <br> 
+
+**2. Finetune with pre-trained MaskMol** <br>  
+a) You can download [activity cliffs estimation](https://github.com/molML/MoleculeACE/tree/main/MoleculeACE/Data/benchmark_data) and [compound potency prediction](https://github.com/TiagoJanela/ML-for-compound-potency-prediction/tree/main/dataset) put it into datasets/finetuning/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
