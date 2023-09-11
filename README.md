@@ -14,9 +14,9 @@ pip install -r requirements.txt<br>
 source activate MaskMol  
 
 ## Pretraining
-1. **get masking image**
+1. **get masking image**<br>  
 `
 python mask_parallel.py --jobs 15
 `
 
-3. **lmdb process**  
+2. **lmdb process**  
