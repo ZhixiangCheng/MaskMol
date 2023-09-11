@@ -15,6 +15,6 @@ source activate MaskMol
 
 ## Pretraining
 1. **get masking image**
-'' python mask_parallel.py --jobs 15 ''
+''' python mask_parallel.py --jobs 15 '''
 
-2. **lmdb process**  
+3. **lmdb process**  
