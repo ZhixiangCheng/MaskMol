@@ -5,13 +5,10 @@
 ---
 
 1. GPU environment
-   
 CUDA 11.1
 
-3. create a new conda environment
+2. create a new conda environment
 conda create -n MaskMol python=3.7
+conda activate imagemol
 
-5. 
-
-6. 
-7. 
+   
