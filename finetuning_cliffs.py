@@ -1,11 +1,3 @@
-# -*- coding: UTF-8 -*-
-"""
-Project -> File: molecule -> finetuning
-Author: cer0
-Date: 2023-04-18 21:01
-Description:
-
-"""
 import argparse
 import os
 import sys
@@ -19,7 +11,7 @@ from sklearn import metrics
 import logging
 
 from utils.public_utils import setup_device, Logger, cal_torch_model_params, is_left_better_right
-from model.train_utils import MMViT, fix_train_random_seed, save_finetune_ckpt, metric_reg, calc_cliff_rmse
+from model.train_utils import MaskMol, fix_train_random_seed, save_finetune_ckpt, metric_reg, calc_cliff_rmse
 from dataloader.image_dataloader import smiles_label_cliffs, ImageDataset
 
 
@@ -97,7 +89,7 @@ def main(args):
         os.makedirs(args.log_dir)
 
     sys.stdout = Logger(
-        args.log_dir + "40w_proportion_0.5_finetuning_{}_{}_{}_{}_{}.log".format(args.dataset, args.resume, args.eval_metric, args.runseed, args.lr))
+        args.log_dir + "finetuning_{}_{}_{}_{}_{}.log".format(args.dataset, args.resume, args.eval_metric, args.runseed, args.lr))
 
     device, device_ids = setup_device(args.ngpu)
 
@@ -139,32 +131,24 @@ def main(args):
                                                   pin_memory=True)
 
     ##################################### load model #####################################
-    model = MMViT()
+    model = MaskMol()
 
-    resume = "/data/chengzhixiang/MaskMol/ckpts/pretrain/checkpoints_ablation_atom/" + args.resume + ".pth.tar"
+    resume = "./ckpts/pretrain/" + args.resume + ".pth.tar"
 
     if resume:
         if os.path.isfile(resume):
             print("=> loading checkpoint '{}'".format(resume))
             checkpoint = torch.load(resume)
-#             del_keys = ['module.atom_patch_classifier.weight', 'module.atom_patch_classifier.bias', 'module.bond_patch_classifier.weight',
-#              'module.bond_patch_classifier.bias', 'module.motif_classifier.weight', 'module.motif_classifier.bias'] 
-#             for k in del_keys:
-#                 del checkpoint['state_dict'][k]
+            del_keys = ['module.atom_patch_classifier.weight', 'module.atom_patch_classifier.bias', 'module.bond_patch_classifier.weight',
+             'module.bond_patch_classifier.bias', 'module.motif_classifier.weight', 'module.motif_classifier.bias'] 
+            for k in del_keys:
+                del checkpoint['state_dict'][k]
             model.load_state_dict({k.replace('module.',''):v for k,v in checkpoint['state_dict'].items()}, strict=False)
         else:
             print("=> no checkpoint found at '{}'".format(resume))
-            
-#     # Freeze the ViT and ReLU layers
-#     for param in model.parameters():
-#         param.requires_grad = False
-
-#     # Unfreeze the last layer (FC Layer)
-#     for param in model.regressor.parameters():
-#         param.requires_grad = True
 
     # print(model)
-    # print("params: {}".format(cal_torch_model_params(model)))
+    print("params: {}".format(cal_torch_model_params(model)))
     model = model.cuda()
     if len(device_ids) > 1:
         model = torch.nn.DataParallel(model, device_ids=device_ids)
@@ -264,7 +248,7 @@ if __name__ == '__main__':
                         help='manual epoch number (useful on restarts) (default: 0)')
     parser.add_argument('--batch', default=128, type=int, help='mini-batch size (default: 128)')
     parser.add_argument('--resume', default='', type=str, metavar='PATH',
-                        help='path to checkpoint 85798656 (default: None) ./ckpts/pretrain/checkpoints/MMViT_1.pth.tar')
+                        help='path to checkpoint (default: None) ./ckpts/pretrain/MaskMol_small.pth.tar')
     parser.add_argument('--imageSize', type=int, default=224, help='the height / width of the input image to network')
     parser.add_argument('--image_aug', action='store_true', default=True, help='whether to use data augmentation')
     parser.add_argument('--save_finetune_ckpt', type=int, default=1, choices=[0, 1],
