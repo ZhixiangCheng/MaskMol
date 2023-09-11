@@ -14,6 +14,7 @@ pip install -r requirements.txt<br>
 source activate MaskMol  
 
 ## Pretraining
+Download [pretraining data](https://drive.google.com/file/d/1VGCADtln1NRswoOnnGa9iWyM2Xe9gmq7/view?usp=sharing) and put it into ./datasets/pretrain/<br>  
 **1. get masking image**<br>  
 ```
 python ./data_process/mask_parallel.py --jobs 15
