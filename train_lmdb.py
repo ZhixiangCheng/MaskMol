@@ -23,7 +23,7 @@ from sklearn.model_selection import train_test_split
 
 from utils.public_utils import setup_device, Logger
 from model.train_utils import fix_train_random_seed
-from model.vit_model import MMViT
+from model.vit_model import MaskMol
 from dataloader.pretrain_dataLoader_lmdb import MoleculeDataset_LDMB
 
 
@@ -181,7 +181,7 @@ def main(args):
 
     ################################## laod modle begin ###############################
 
-    model = MMViT(atom_classes=mask_atom_classes, bond_classes=mask_bond_classes, motif_classes=mask_motif_classes)
+    model = MaskMol(atom_classes=mask_atom_classes, bond_classes=mask_bond_classes, motif_classes=mask_motif_classes)
 
     if args.resume:
         if os.path.isfile(args.resume):
@@ -308,7 +308,7 @@ def main(args):
         if not os.path.exists(saveRoot):
             os.makedirs(saveRoot)
         if epoch % args.checkpoints == 0:
-            saveFile = os.path.join(saveRoot, 'MMViT_{}.pth.tar'.format(epoch + 1))
+            saveFile = os.path.join(saveRoot, 'MaskMol_{}.pth.tar'.format(epoch + 1))
             if args.verbose:
                 print('Save checkpoint at: {}'.format(saveFile))
 
