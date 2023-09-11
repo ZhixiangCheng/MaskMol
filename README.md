@@ -74,7 +74,7 @@ python train_lmdb.py --gpu 0 \
 All finetuning datasets can be download in [link](https://drive.google.com/file/d/1I2O0AhTO3CGaYMsQl_EnKusmJw6ZXC8y/view?usp=sharing)
 
 **1. Download pre-trained MaskMol** <br>  
-You can download pre-trained model ([$ MaskMol_small $](https://drive.google.com/file/d/1WuL3TP2tW2c2QF7vVPnj-FLZqEobZIql/view?usp=sharing), [$ MaskMol_base $](https://drive.google.com/file/d/1zqAmV8WvOTEQwEc6XSBltRNlt_GD7aFp/view?usp=sharing)) and push it into the folder ckpts/ <br> 
+You can download pre-trained model ([MaskMol_small](https://drive.google.com/file/d/1WuL3TP2tW2c2QF7vVPnj-FLZqEobZIql/view?usp=sharing), [MaskMol_base](https://drive.google.com/file/d/1zqAmV8WvOTEQwEc6XSBltRNlt_GD7aFp/view?usp=sharing)) and push it into the folder ckpts/ <br> 
 
 **2. Finetune with pre-trained MaskMol** <br>  
 a) You can download [activity cliffs estimation](https://github.com/molML/MoleculeACE/tree/main/MoleculeACE/Data/benchmark_data) and [compound potency prediction](https://github.com/TiagoJanela/ML-for-compound-potency-prediction/tree/main/dataset) put it into datasets/finetuning/ <br> 
@@ -96,7 +96,7 @@ python finetuning_cliffs.py --gpu 0 \
                    --save_finetune_ckpt 1 \
                    --dataroot ./datasets/finetuning/cliffs \
                    --dataset CHEMBL219_Ki \
-                   --resume ./ckpts/pretrain/MaskMol.pth.tar \
+                   --resume ./ckpts/pretrain/MaskMol_base.pth.tar \
                    --lr 5e-4 \
                    --batch 16 \
                    --epochs 100 \
