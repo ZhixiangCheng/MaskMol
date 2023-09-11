@@ -15,8 +15,13 @@ source activate MaskMol
 
 ## Pretraining
 1. **get masking image**<br>  
-`
-python mask_parallel.py --jobs 15
-`
+```
+python ./data_process/mask_parallel.py --jobs 15
+```
+**Note:** You can find the img, Atom, Bond, and Morif in datasets/pretrain<br>  
 
-2. **lmdb process**  
+2. **lmdb process**<br>  
+
+```
+python ./data_process/lmdb_process.py --jobs 15
+```
