@@ -62,17 +62,12 @@ def parse_args():
                         help='path to checkpoint (default: None)')
     parser.add_argument('--seed', type=int, default=2023, help='random seed (default: 2023)')
     parser.add_argument('--data_path', type=str, default=".datasets/pretrain/", help='data root')
-    parser.add_argument('--data_dir', type=str, default="./datasets/pretrain/img/", help='data root')
-    parser.add_argument('--mask_atom_dir', type=str, default="./datasets/pretrain/Atom/mask/", help='mask atom dir')
-    parser.add_argument('--mask_bond_dir', type=str, default="./datasets/pretrain/Bond/mask/", help='mask bond dir')
-    parser.add_argument('--mask_motif_dir', type=str, default="./datasets/pretrain/Motif/mask/", help='mask motif dir')
     parser.add_argument('--log_dir', type=str, default="./logs/", help='log dir')
     parser.add_argument('--proportion', type=float, default=0.5, help='mask atom or bond proportion')
     parser.add_argument('--ckpt_dir', default='./ckpts/', help='path to checkpoint')
     parser.add_argument('--verbose', action='store_true', help='')
     parser.add_argument('--ngpu', type=int, default=4, help='number of GPUs to use')
     parser.add_argument('--gpu', type=str, default="0", help='GPUs of CUDA_VISIBLE_DEVICES')
-    parser.add_argument('--imageSize', type=int, default=224, help='the height / width of the input image to network')
     parser.add_argument('--Atom_lambda', type=float, default=1,
                         help='start MAP(Mask Atom Prediction) task, 1 means start, 0 means not start')
     parser.add_argument('--Bond_lambda', type=float, default=1,
