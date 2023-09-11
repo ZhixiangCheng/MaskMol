@@ -75,15 +75,54 @@ python train_lmdb.py --gpu 0 \
 You can download pre-trained model and push it into the folder ckpts/ <br> 
 
 **2. Finetune with pre-trained MaskMol** <br>  
-a) You can download [activity cliffs estimation](https://github.com/molML/MoleculeACE/tree/main/MoleculeACE/Data/benchmark_data) and [compound potency prediction](https://github.com/TiagoJanela/ML-for-compound-potency-prediction/tree/main/dataset) put it into datasets/finetuning/
+a) You can download [activity cliffs estimation](https://github.com/molML/MoleculeACE/tree/main/MoleculeACE/Data/benchmark_data) and [compound potency prediction](https://github.com/TiagoJanela/ML-for-compound-potency-prediction/tree/main/dataset) put it into datasets/finetuning/ <br> 
 
+b) The usage is as follows:
+```
+usage: finetuning.py [-h] [--dataset DATASET] [--dataroot DATAROOT]
+                     [--gpu GPU] [--ngpu NGPU] [--workers WORKERS] [--lr LR]
+                     [--weight_decay WEIGHT_DECAY] [--momentum MOMENTUM]
+                     [--seed SEED] [--runseed RUNSEED] [--epochs EPOCHS]
+                     [--start_epoch START_EPOCH] [--batch BATCH]
+                     [--resume PATH] [--imageSize IMAGESIZE] [--image_aug]
+                     [--save_finetune_ckpt {0,1}] [--eval_metric EVAL_METRIC]
+                     [--log_dir LOG_DIR] [--ckpt_dir CKPT_DIR]
+```
+For example:
+```
+python finetuning_cliffs.py --gpu 0 \
+                   --save_finetune_ckpt 1 \
+                   --dataroot ./datasets/finetuning/cliffs \
+                   --dataset CHEMBL219_Ki \
+                   --resume ./ckpts/pretrain/MaskMol.pth.tar \
+                   --lr 5e-4 \
+                   --batch 16 \
+                   --epochs 100 \
+                   --eval_metric rmse
+```
 
+## Attention Visualization
+More about GradCAM heatmap can be found from this link: [https://github.com/jacobgil/vit-explain](https://github.com/jacobgil/vit-explain) <br> 
 
+We also provide a script to generate GradCAM heatmaps:
 
+```
+usage: vit_explain.py [-h] [--use_cuda] [--image_path IMAGE_PATH]
+                      [--molecule_path MOLECULE_PATH]
+                      [--head_fusion HEAD_FUSION]
+                      [--discard_ratio DISCARD_RATIO]
+                      [--category_index CATEGORY_INDEX] [--resume PATH]
+                      [--gpu GPU]
+```
+you can run the following script:
 
-
-
-
+```
+python main.py --resume MaskMol \
+               --img_path 1.png \
+               --discard_ratio 0.9 \
+               --gpu 0 \
+               --category_index 0
+```
 
 
 
