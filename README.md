@@ -71,8 +71,9 @@ python train_lmdb.py --gpu 0 \
 ```
 
 ## Finetuning
+All finetuning datasets can be download in [link](https://drive.google.com/file/d/1I2O0AhTO3CGaYMsQl_EnKusmJw6ZXC8y/view?usp=sharing)
 
-**1. Download pre-trained ImageMol** <br>  
+**1. Download pre-trained MaskMol** <br>  
 You can download pre-trained model and push it into the folder ckpts/ <br> 
 
 **2. Finetune with pre-trained MaskMol** <br>  
