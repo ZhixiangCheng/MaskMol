@@ -19,13 +19,13 @@ Download [pretraining data](https://drive.google.com/file/d/1VGCADtln1NRswoOnnGa
 ```
 python ./data_process/mask_parallel.py --jobs 15
 ```
-**Note:** You can find the img, Atom, Bond, and Morif in datasets/pretrain<br>  
+**Note:** You can find the img, Atom, Bond, and Morif in ./datasets/pretrain<br>  
 
 **2. lmdb process**<br>  
 ```
 python ./data_process/lmdb_process.py --jobs 15
 ```
-**Note:** You can find the four files (img_lmdb, Atom_lmdb, Bond_lmdb, Motif_lmdb) in datasets, and you can download the [20w pretraining data](https://drive.google.com/file/d/1uLsV-VS1XS60gSAcuU5ceSPNbyvkeX6m/view?usp=sharing). /pretrain<br>  
+**Note:** You can find the four files (img_lmdb, Atom_lmdb, Bond_lmdb, Motif_lmdb) in ./datasets/pretrain/, and you can download the [20w pretraining data](https://drive.google.com/file/d/1uLsV-VS1XS60gSAcuU5ceSPNbyvkeX6m/view?usp=sharing). <br>  
 
 **3. start to pretrain**<br>  
 Usage:<br>  
